@@ -15,8 +15,11 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member findMember = em.find(Member.class, 1L);
-            findMember.setName("HelloJPA");
+
+            Member member = em.find(Member.class, 100L);
+            member.setName("NOOOO");
+
+            System.out.println("=============================");
 
             tx.commit();
 
