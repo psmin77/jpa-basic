@@ -36,7 +36,7 @@
 ~~~java
 String jpql = "SELECT m FROM Member m ORDER BY m.name DESC"
 List<Member> result = em.createQuery(jpql, Member.class)
-						.setFirstResult(10)
+			.setFirstResult(10)
                        	.setMaxResults(20)
                        	.getResultList();  
 ~~~
@@ -73,15 +73,14 @@ List<Member> result = em.createQuery(jpql, Member.class)
 
 # 경로 표현식
 - .(점)으로 객체 그래프 탐색
-- 특징
-  - 상태 필드(state field) : 값을 저장하기 위한 필드
-    - 경로 탐색의 끝
-    - _(ex) select m.username, m.age from Member m_
-  - 연관 필드(association field) : 연관관계를 위한 필드
-    - 묵시적 내부 조인 발생
-    - 단일 값 연관 필드 : @ManyToOne, @OneToOne, 엔티티 대상
-    - _(ex) select o.member from Order o_
-    - 컬렉션 값 연관 필드 : @OneToMany, @ManyToMany, 컬렉션 대상
+- 상태 필드(state field) : 값을 저장하기 위한 필드
+  - 경로 탐색의 끝
+  - _(ex) select m.username, m.age from Member m_
+- 연관 필드(association field) : 연관관계를 위한 필드
+  - 묵시적 내부 조인 발생
+  - 단일 값 연관 필드 : @ManyToOne, @OneToOne, 엔티티 대상
+  - _(ex) select o.member from Order o_
+  - 컬렉션 값 연관 필드 : @OneToMany, @ManyToMany, 컬렉션 대상
 - 명시적 조인 사용 권장
 <br>
 
@@ -110,28 +109,29 @@ WHERE t.name = 'teamA'
 - 애플리케이션에서 엔티티 중복 제거
 
 ## 특징과 한계
-  - JPQL은 연관관계를 고려하지 않기 때문에 SELECT절에 지정한 엔티티만 조회
-  - 페치 조인을 사용할 때만 연관된 엔티티도 함께 조회(즉시 로딩)
-  - 페치 조인 대상에는 별칭 사용 불가
-  - 둘 이상의 컬렉션은 페치 조인 불가
-  - 컬렉션을 페치 조인하면 페이징 API 사용 불가
-  - 최적화가 필요한 경우 페치 조인 적용
-  - 객체 그래프를 유지할 때 사용하면 효과적
+- JPQL은 연관관계를 고려하지 않기 때문에 SELECT절에 지정한 엔티티만 조회
+- 페치 조인을 사용할 때만 연관된 엔티티도 함께 조회(즉시 로딩)
+- 페치 조인 대상에는 별칭 사용 불가
+- 둘 이상의 컬렉션은 페치 조인 불가
+- 컬렉션을 페치 조인하면 페이징 API 사용 불가
+- 최적화가 필요한 경우 페치 조인 적용
+- 객체 그래프를 유지할 때 사용하면 효과적
 <br>
 
 # 다형성 쿼리
 ## TYPE
-  - 조회 대상을 특정 자식으로 한정
-  - 자바의 타입 캐스팅과 유사
-  - 상속 구조에서 부모 타입을 특정 자식 타입으로 다룰 때 사용
-  - FROM, WHERE, SELECT 사용
+- 조회 대상을 특정 자식으로 한정
+- 자바의 타입 캐스팅과 유사
+- 상속 구조에서 부모 타입을 특정 자식 타입으로 다룰 때 사용
+- FROM, WHERE, SELECT 사용
 <br>
 
 # 엔티티 직접 사용
 - JPQL에서 엔티티를 직접 사용하면, SQL에서 해당 엔티티의 기본 키 값을 사용함
-  - [JPQL] select count(m.id) from Member m
-  select count(m) from Member m 
-  - [SQL] SELECT count(m.id) AS cnt FROM member m
+- [JPQL] select count(m.id) from Member m
+select count(m) from Member m 
+- [SQL] SELECT count(m.id) AS cnt FROM member m
+
 ## 파라미터 전달
 - _m = :member_
 - _.setParameter("member", member)_
